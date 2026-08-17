@@ -3,10 +3,18 @@ import { Link, useLocation } from 'react-router-dom';
 import { Phone, Menu, X } from 'lucide-react';
 import { NAV_LINKS } from '../data/navigation';
 
-const Navbar = ({ onOpenModal }) => {
+const Navbar = ({ onOpenModal, onOpenBranchModal }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+
+  const handleExpertClick = () => {
+    if (onOpenBranchModal) {
+      onOpenBranchModal();
+    } else if (onOpenModal) {
+      onOpenModal();
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +52,7 @@ const Navbar = ({ onOpenModal }) => {
 
         {/* RIGHT: Deep Teal CTA */}
         <div className="navbar-actions">
-          <button className="btn btn-primary" onClick={onOpenModal}>
+          <button className="btn btn-primary" onClick={handleExpertClick}>
             <Phone size={16} />
             <span>Talk to a Loan Expert</span>
           </button>
@@ -75,7 +83,7 @@ const Navbar = ({ onOpenModal }) => {
           </ul>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: 'auto' }}>
-            <button className="btn btn-primary" onClick={() => { setMobileMenuOpen(false); onOpenModal(); }}>
+            <button className="btn btn-primary" onClick={() => { setMobileMenuOpen(false); handleExpertClick(); }}>
               Talk to a Loan Expert
             </button>
           </div>

@@ -71,12 +71,12 @@ const Hero = ({ onOpenModal }) => {
           {/* CTA Buttons */}
           <div className="hero-actions">
             <button className="btn btn-primary" onClick={onOpenModal}>
-              <span>Check Your Eligibility</span>
+              <span>Apply for Your Loan </span>
               <ArrowRight size={18} />
             </button>
 
             <a href="#callback-form" className="btn btn-secondary">
-              Apply for Education Loan
+              Check your eligibility
             </a>
           </div>
         </div>

@@ -2,14 +2,20 @@
 @import './variables.css';
 @import './navbar.css';
 @import './hero.css';
+@import './stats-strip.css';
+@import './lending-partners.css';
 @import './loan-categories.css';
 @import './why-gsf.css';
 @import './destinations.css';
+@import './loan-calculator.css';
 @import './loan-process.css';
 @import './testimonials.css';
+@import './faq-section.css';
+@import './final-cta.css';
 @import './callback-form.css';
 @import './whatsapp-section.css';
 @import './footer.css';
+@import './eligibility-modal.css';
 @import './responsive.css';
 
 /* Layout Spacing Rules */
