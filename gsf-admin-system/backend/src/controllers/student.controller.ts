@@ -7,7 +7,8 @@ import {
   applicationsStore,
   studentUpdatesStore,
   studentNotificationsStore,
-  studentDocumentsStore
+  studentDocumentsStore,
+  saveDatabase
 } from '../config/database';
 
 // Salted SHA-256 password hashing helper
@@ -146,6 +147,7 @@ export class StudentController {
       student.passwordHash = hashPassword(newPassword);
       student.isPasswordSet = true;
       student.updatedAt = new Date().toISOString();
+      saveDatabase();
 
       res.json({
         success: true,

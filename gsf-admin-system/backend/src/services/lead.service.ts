@@ -1,7 +1,7 @@
-import { leadsStore, studentsStore, applicationsStore, studentUpdatesStore, studentNotificationsStore, studentDocumentsStore, StudentAccount, StudentLoanApplication, StudentUpdateItem, StudentNotificationItem, StudentDocumentItem } from '../config/database';
-import { Lead, LeadActivity, FollowUpItem, DashboardStats } from '../../../shared/types/lead';
-import { LeadClassification } from '../../../shared/constants/leadClassification';
-import { LeadStatus } from '../../../shared/constants/leadStatus';
+import { leadsStore, studentsStore, applicationsStore, studentUpdatesStore, studentNotificationsStore, studentDocumentsStore, saveDatabase, StudentAccount, StudentLoanApplication, StudentUpdateItem, StudentNotificationItem, StudentDocumentItem } from '../config/database';
+import { Lead, LeadActivity, FollowUpItem, DashboardStats } from '../shared/types/lead';
+import { LeadClassification } from '../shared/constants/leadClassification';
+import { LeadStatus } from '../shared/constants/leadStatus';
 import { notificationService } from './notification.service';
 
 export class LeadService {
@@ -163,6 +163,7 @@ export class LeadService {
     // 4. Trigger Super Admin Notification & Socket.IO Event
     notificationService.createLeadNotification(newLead);
 
+    saveDatabase();
     return newLead;
   }
 
@@ -190,6 +191,7 @@ export class LeadService {
     lead.activities.unshift(activity);
 
     notificationService.notifyClassificationChange(lead, oldClassification, newClassification, adminName);
+    saveDatabase();
     return lead;
   }
 
@@ -326,6 +328,7 @@ export class LeadService {
       createdAt: new Date().toISOString()
     });
 
+    saveDatabase();
     return true;
   }
 
@@ -392,6 +395,7 @@ export class LeadService {
       });
     }
 
+    saveDatabase();
     return true;
   }
 
@@ -412,6 +416,7 @@ export class LeadService {
     if (!lead.activities) lead.activities = [];
     lead.activities.unshift(activity);
 
+    saveDatabase();
     return lead;
   }
 
@@ -449,6 +454,7 @@ export class LeadService {
     if (!lead.activities) lead.activities = [];
     lead.activities.unshift(activity);
 
+    saveDatabase();
     return newFollowUp;
   }
 

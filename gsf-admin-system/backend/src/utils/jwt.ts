@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { AdminUser } from '../../../shared/types/admin';
+import { AdminUser } from '../shared/types/admin';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'gsf_super_secret_jwt_key_2026_finance_admin';
 

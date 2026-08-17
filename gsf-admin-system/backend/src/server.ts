@@ -12,6 +12,7 @@ import otpRoutes from './routes/otp.routes';
 import settingsRoutes from './routes/settings.routes';
 import studentRoutes from './routes/student.routes';
 import { setSocketServer } from './services/notification.service';
+import { initDatabase } from './config/database';
 
 dotenv.config();
 
@@ -102,10 +103,12 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-server.listen(PORT, HOST, () => {
-  console.log(`=======================================================`);
-  console.log(`🚀 GSF Backend API running on http://${HOST}:${PORT}`);
-  console.log(`⚡ Real-Time Socket.IO Server active`);
-  console.log(`🔗 Health Check: http://localhost:${PORT}/api/health`);
-  console.log(`=======================================================`);
+initDatabase().then(() => {
+  server.listen(PORT, HOST, () => {
+    console.log(`=======================================================`);
+    console.log(`🚀 GSF Backend API running on http://${HOST}:${PORT}`);
+    console.log(`⚡ Real-Time Socket.IO Server active`);
+    console.log(`🔗 Health Check: http://localhost:${PORT}/api/health`);
+    console.log(`=======================================================`);
+  });
 });

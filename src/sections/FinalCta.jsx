@@ -33,11 +33,6 @@ const FinalCta = ({ onOpenModal, onOpenBranchModal }) => {
               <span>Talk to a Loan Expert</span>
               <ArrowRight size={18} />
             </button>
-
-            <button className="btn btn-secondary-white btn-lg" onClick={onOpenModal}>
-              <span>Check Your Eligibility</span>
-              <ArrowRight size={18} />
-            </button>
           </div>
 
           <div className="final-cta-trust-strip">

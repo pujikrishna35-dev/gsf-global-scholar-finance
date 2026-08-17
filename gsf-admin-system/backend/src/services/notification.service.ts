@@ -1,6 +1,6 @@
 import { notificationsStore } from '../config/database';
-import { AdminNotification, NotificationType } from '../../../shared/types/notification';
-import { Lead } from '../../../shared/types/lead';
+import { AdminNotification, NotificationType } from '../shared/types/notification';
+import { Lead } from '../shared/types/lead';
 import { Server as SocketIOServer } from 'socket.io';
 
 let ioInstance: SocketIOServer | null = null;
