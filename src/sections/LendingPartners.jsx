@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Building2, ExternalLink } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 const PARTNERS = [
   {
@@ -8,7 +8,8 @@ const PARTNERS = [
     type: 'Premier NBFC Partner',
     desc: 'Specialized education loans up to 1.5 Cr',
     badge: 'NBFC',
-    color: '#004B87'
+    color: '#004B87',
+    logo: '/images/lenders/hdfc-credila.svg'
   },
   {
     id: 'sbi',
@@ -16,7 +17,8 @@ const PARTNERS = [
     type: 'Public Sector Bank',
     desc: 'Lowest interest rates for top global institutes',
     badge: 'Govt Bank',
-    color: '#00B5EF'
+    color: '#00B5EF',
+    logo: '/images/lenders/sbi.svg'
   },
   {
     id: 'icici',
@@ -24,7 +26,8 @@ const PARTNERS = [
     type: 'Leading Private Bank',
     desc: 'Pre-visa sanction & quick digital processing',
     badge: 'Private Bank',
-    color: '#F37021'
+    color: '#F37021',
+    logo: '/images/lenders/icici.svg'
   },
   {
     id: 'axis',
@@ -32,7 +35,8 @@ const PARTNERS = [
     type: 'Leading Private Bank',
     desc: '100% funding option with flexible repayment',
     badge: 'Private Bank',
-    color: '#971237'
+    color: '#971237',
+    logo: '/images/lenders/axis.svg'
   },
   {
     id: 'avanse',
@@ -40,7 +44,8 @@ const PARTNERS = [
     type: 'Education NBFC',
     desc: 'Non-collateral loans for STEM & Management',
     badge: 'NBFC',
-    color: '#0067B1'
+    color: '#0067B1',
+    logo: '/images/lenders/avanse.svg'
   },
   {
     id: 'auxilo',
@@ -48,7 +53,8 @@ const PARTNERS = [
     type: 'Education Finance Specialist',
     desc: 'Customized loan solutions for global courses',
     badge: 'NBFC',
-    color: '#E31E24'
+    color: '#E31E24',
+    logo: '/images/lenders/auxilo.svg'
   },
   {
     id: 'incred',
@@ -56,7 +62,8 @@ const PARTNERS = [
     type: 'Technology NBFC',
     desc: 'Fast digital approval & doorstep service',
     badge: 'NBFC',
-    color: '#1A365D'
+    color: '#1A365D',
+    logo: '/images/lenders/incred.svg'
   },
   {
     id: 'prodigy',
@@ -64,7 +71,8 @@ const PARTNERS = [
     type: 'International Lender',
     desc: 'No-cosigner loans in USD for top US/UK universities',
     badge: 'Global Lender',
-    color: '#005C5B'
+    color: '#005C5B',
+    logo: '/images/lenders/prodigy.svg'
   }
 ];
 
@@ -86,10 +94,11 @@ const LendingPartners = () => {
               <div className="partner-badge-tag">{partner.badge}</div>
               
               <div className="partner-logo-box">
-                <div className="partner-icon-circle" style={{ backgroundColor: `${partner.color}15`, color: partner.color }}>
-                  <Building2 size={24} />
-                </div>
-                <span className="partner-name">{partner.name}</span>
+                <img
+                  src={partner.logo}
+                  alt={`${partner.name} logo`}
+                  className="partner-official-logo"
+                />
               </div>
 
               <div className="partner-info">
