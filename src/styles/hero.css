@@ -332,10 +332,11 @@
   }
 
   .animated-hero-airplane {
-    top: 68px;
-    right: 4%;
-    width: 75px;
-    opacity: 0.75;
+    top: 65px;
+    right: 3%;
+    width: 105px;
+    opacity: 0.85;
+    z-index: 3;
   }
 
   .revolving-hero-globe {
