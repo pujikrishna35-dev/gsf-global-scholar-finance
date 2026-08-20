@@ -261,3 +261,187 @@
   padding: 10px 16px;
   font-size: 0.88rem;
 }
+
+/* TABLET ONLY BREAKPOINT (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-section {
+    min-height: auto;
+    height: auto;
+    max-height: none;
+    padding: 110px 0 40px 0;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.02rem;
+  }
+
+  .hero-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 24px;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+
+  .hero-right {
+    min-height: 380px;
+    justify-content: center;
+  }
+
+  .hero-student-girl-near-giantwheel {
+    position: relative;
+    bottom: 0;
+    right: auto;
+    max-height: 420px;
+  }
+
+  .animated-hero-airplane {
+    top: 90px;
+    right: 6%;
+    width: 110px;
+  }
+
+  .revolving-hero-globe {
+    width: 400px;
+    height: 400px;
+    bottom: -150px;
+    left: -150px;
+    opacity: 0.2;
+  }
+}
+
+/* MOBILE ONLY BREAKPOINT (<= 767px) */
+@media (max-width: 767px) {
+  .hero-section {
+    min-height: auto;
+    height: auto;
+    max-height: none;
+    padding: 80px 0 32px 0;
+    background-position: top center;
+    overflow: hidden;
+  }
+
+  .animated-hero-airplane {
+    top: 68px;
+    right: 4%;
+    width: 75px;
+    opacity: 0.75;
+  }
+
+  .revolving-hero-globe {
+    display: none;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .hero-left {
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero-badge {
+    font-size: 0.7rem;
+    padding: 5px 12px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-title {
+    font-size: 2.1rem;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  .hero-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .benefit-item-compact {
+    font-size: 0.88rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    height: 48px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    justify-content: center;
+  }
+
+  .hero-right {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    overflow: visible;
+  }
+
+  .hero-student-girl-near-giantwheel {
+    position: relative;
+    bottom: 0;
+    right: auto;
+    height: auto;
+    max-height: 320px;
+    width: 100%;
+    max-width: 320px;
+    object-fit: contain;
+  }
+
+  .dark-callback-card {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.6rem;
+  }
+}
