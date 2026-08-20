@@ -5,7 +5,7 @@ import { io } from 'socket.io-client';
 import './student.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-const SOCKET_URL = API_BASE.replace('/api', '');
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || API_BASE.replace('/api', '');
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
