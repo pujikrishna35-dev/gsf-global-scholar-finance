@@ -181,6 +181,26 @@ button {
   background-color: var(--primary-teal-dark);
 }
 
+.admin-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+}
+
+/* Responsive Metrics Grids */
+.admin-stats-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.admin-stats-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
 /* Notification Animations & Styles */
 @keyframes fadeInDown {
   from {
@@ -226,5 +246,38 @@ button {
 
 .hover-bg-teal:hover {
   background-color: var(--primary-teal-subtle) !important;
+}
+
+/* Responsive Breakpoints for Admin Panel */
+@media (max-width: 1280px) {
+  .admin-stats-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .admin-stats-grid-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .admin-content {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-stats-grid-4,
+  .admin-stats-grid-5 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .admin-card {
+    padding: 16px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-content {
+    padding: 14px 12px;
+  }
 }
 

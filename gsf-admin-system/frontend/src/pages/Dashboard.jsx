@@ -64,7 +64,7 @@ const Dashboard = () => {
         <div className="admin-content" style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
           
           {/* Top Row Metrics */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+          <div className="admin-stats-grid-4">
             <StatsCard
               title="Total Leads"
               value={stats?.totalLeads || 0}
@@ -100,7 +100,7 @@ const Dashboard = () => {
           </div>
 
           {/* Second Row Operational Metrics */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '16px' }}>
+          <div className="admin-stats-grid-5">
             <StatsCard
               title="New Inquiries"
               value={stats?.newLeads || 0}

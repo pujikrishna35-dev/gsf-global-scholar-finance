@@ -91,7 +91,7 @@
 /* Mobile Large (<= 768px) */
 @media (max-width: 768px) {
   .section-padding {
-    padding: 50px 0;
+    padding: 48px 0;
   }
   .hero-title {
     font-size: 2.1rem;
@@ -123,6 +123,16 @@
     gap: 10px;
     text-align: center;
   }
+
+  .eligibility-modal-card {
+    max-width: 95vw;
+    padding: 24px 16px;
+  }
+
+  .branch-modal-container {
+    max-width: 95vw;
+    padding: 20px 16px;
+  }
 }
 
 /* Small Mobile (<= 480px) */
@@ -131,7 +141,11 @@
     padding: 0 16px;
   }
   .hero-title {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
+    line-height: 1.25;
+  }
+  .hero-subtitle {
+    font-size: 0.94rem;
   }
   .hero-actions {
     flex-direction: column;
@@ -144,9 +158,30 @@
     padding: 20px 16px;
   }
   .floating-whatsapp-btn {
-    bottom: 18px;
-    right: 18px;
-    width: 50px;
-    height: 50px;
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+  .loan-calc-container {
+    padding: 20px 14px;
+  }
+  .partner-logo-card {
+    padding: 12px;
+  }
+}
+
+/* Extra Small Mobile (320px - 375px) */
+@media (max-width: 375px) {
+  .container {
+    padding: 0 12px;
+  }
+  .hero-title {
+    font-size: 1.55rem;
+  }
+  .btn {
+    padding: 0 16px;
+    font-size: 0.86rem;
+    height: 44px;
   }
 }
