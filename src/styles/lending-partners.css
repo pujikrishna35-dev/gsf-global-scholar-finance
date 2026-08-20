@@ -71,18 +71,17 @@
 .partner-logo-box {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: flex-start;
+  height: 52px;
   margin-bottom: 16px;
+  padding-right: 60px;
 }
 
-.partner-icon-circle {
-  width: 44px;
+.partner-official-logo {
+  max-width: 100%;
   height: 44px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  object-fit: contain;
+  display: block;
 }
 
 .partner-name {
