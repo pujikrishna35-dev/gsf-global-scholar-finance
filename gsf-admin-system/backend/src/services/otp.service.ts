@@ -79,23 +79,43 @@ export class OtpService {
             channel: 'sms'
           });
 
-        console.log(`📲 Twilio Verify SMS sent to ${e164Phone}. Status: ${verification.status}`);
+        console.log('📲 [TWILIO VERIFY AUDIT] Dispatch Request Accepted:');
+        console.log(`- Target Phone: ${e164Phone}`);
+        console.log(`- Verification SID: ${verification.sid}`);
+        console.log(`- Status: ${verification.status}`);
 
         return {
           success: true,
-          message: `Verification code sent to ${e164Phone} via SMS.`,
+          message: 'OTP request accepted. Please check your phone.',
           e164Phone
         };
       } catch (error: any) {
-        console.error('❌ Twilio Verify Send Error:', error);
-        throw new Error(error.message || 'Failed to send SMS OTP via Twilio Verify');
+        console.error('📲 [TWILIO VERIFY AUDIT] Dispatch Request Failed:');
+        console.error(`- Target Phone: ${e164Phone}`);
+        console.error(`- Service SID Exists: ${!!this.serviceSid}`);
+        console.error(`- Twilio Error Code: ${error.code || 'N/A'}`);
+        console.error(`- Twilio Message: ${error.message || 'Unknown Twilio error'}`);
+
+        let userMsg = 'We couldn\'t send the OTP right now. Please try again.';
+
+        if (error.code === 21608) {
+          userMsg = `This phone number (${e164Phone}) is not registered as a verified recipient in your Twilio Trial account. Please verify this number on Twilio Console.`;
+        } else if (error.code === 21211 || error.code === 60200) {
+          userMsg = 'Please enter a valid mobile number.';
+        } else if (error.code === 60203) {
+          userMsg = 'Too many OTP attempts. Please wait before trying again.';
+        } else if (error.code === 20404 || error.code === 20001) {
+          userMsg = 'Twilio Verify Service SID is invalid or not configured correctly.';
+        }
+
+        throw new Error(userMsg);
       }
     } else {
       // Demo / Fallback Mode
       console.log(`📢 [DEMO OTP SERVICE] Simulated OTP send to ${e164Phone}. Enter any 6-digit code or '123456' to verify.`);
       return {
         success: true,
-        message: `OTP sent to ${e164Phone} (Demo mode: Use code 123456 to verify).`,
+        message: 'OTP request accepted. Please check your phone.',
         e164Phone
       };
     }
@@ -109,7 +129,7 @@ export class OtpService {
     const cleanCode = code ? code.trim() : '';
 
     if (!cleanCode || cleanCode.length < 4) {
-      throw new Error('Please enter a valid verification code.');
+      throw new Error('Please enter a valid 6-digit verification code.');
     }
 
     if (this.isTwilioConfigured && this.client && this.serviceSid) {
@@ -120,6 +140,10 @@ export class OtpService {
             to: e164Phone,
             code: cleanCode
           });
+
+        console.log('📲 [TWILIO VERIFY CHECK AUDIT]:');
+        console.log(`- Target Phone: ${e164Phone}`);
+        console.log(`- Verification Check Status: ${check.status}`);
 
         if (check.status === 'approved') {
           // Record successful server-side verification state
@@ -139,8 +163,12 @@ export class OtpService {
           };
         }
       } catch (error: any) {
-        console.error('❌ Twilio Verification Check Error:', error);
-        throw new Error(error.message || 'Verification failed with Twilio Verify.');
+        console.error('📲 [TWILIO VERIFY CHECK AUDIT] Check Error:', error.code, error.message);
+        let userMsg = 'Invalid OTP. Please try again.';
+        if (error.code === 20404 || error.code === 60202) {
+          userMsg = 'OTP expired. Please request a new OTP.';
+        }
+        throw new Error(userMsg);
       }
     } else {
       // Demo / Fallback Mode: Accept 123456 or any 6-digit code
