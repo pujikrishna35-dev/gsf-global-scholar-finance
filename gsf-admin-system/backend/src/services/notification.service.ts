@@ -60,6 +60,8 @@ export class NotificationService {
 
     if (ioInstance) {
       ioInstance.emit('new_notification', notification);
+      ioInstance.emit('new_lead', lead);
+      ioInstance.emit('lead_updated', lead);
     }
 
     return notification;

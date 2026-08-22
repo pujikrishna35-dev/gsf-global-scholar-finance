@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import LeadTable from '../components/LeadTable';
 import ClassificationBadge from '../components/ClassificationBadge';
 import { api } from '../lib/api';
+import { useNotifications } from '../context/NotificationContext';
 import { Filter, Search, Plus, Flame, Sun, Snowflake, RefreshCw } from 'lucide-react';
 
 const Leads = () => {
@@ -11,6 +12,7 @@ const Leads = () => {
   const [classificationFilter, setClassificationFilter] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
+  const { lastLeadEvent } = useNotifications();
 
   const fetchLeads = async () => {
     setLoading(true);
@@ -29,6 +31,13 @@ const Leads = () => {
   useEffect(() => {
     fetchLeads();
   }, [classificationFilter, searchQuery]);
+
+  // Real-time live update on new lead submission
+  useEffect(() => {
+    if (lastLeadEvent) {
+      fetchLeads();
+    }
+  }, [lastLeadEvent]);
 
   const handleStatusChange = async (id, newStatus) => {
     await api.updateLead(id, { status: newStatus });

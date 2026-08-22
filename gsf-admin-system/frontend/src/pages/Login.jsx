@@ -49,21 +49,11 @@ const Login = () => {
         boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)'
       }}>
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <div style={{
-            width: '56px',
-            height: '56px',
-            borderRadius: '14px',
-            backgroundColor: '#005C5B',
-            color: '#F4B63F',
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontWeight: 800,
-            fontSize: '1.6rem',
-            marginBottom: '12px'
-          }}>
-            GSF
-          </div>
+          <img 
+            src="/images/logo/gsf-logo.png" 
+            alt="GSF Global Scholar Finance" 
+            style={{ height: '64px', width: 'auto', objectFit: 'contain', marginBottom: '16px' }} 
+          />
           <h2 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#07324A' }}>Admin Portal Login</h2>
           <p style={{ fontSize: '0.88rem', color: '#64748B', marginTop: '4px' }}>
             GSF Global Scholar Finance Management CRM

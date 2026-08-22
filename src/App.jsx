@@ -13,6 +13,7 @@ import StudyDestinations from './pages/StudyDestinations';
 import LoanOptions from './pages/LoanOptions';
 import Resources from './pages/Resources';
 import Contact from './pages/Contact';
+import CountryLoanPage from './pages/CountryLoanPage';
 
 // Student Panel Components
 import StudentLogin from './pages/student/StudentLogin';
@@ -69,6 +70,7 @@ function App() {
           <Route path="/about" element={<About onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/education-loans" element={<EducationLoans onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/study-destinations" element={<StudyDestinations onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
+          <Route path="/country/:countryId" element={<CountryLoanPage onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/loan-options" element={<LoanOptions onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/resources" element={<Resources onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/contact" element={<Contact onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />

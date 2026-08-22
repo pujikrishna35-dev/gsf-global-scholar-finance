@@ -20,9 +20,14 @@
 }
 
 .footer-logo img {
-  width: 130px;
-  height: auto;
-  filter: brightness(0) invert(1);
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  display: inline-block;
 }
 
 .footer-tagline {

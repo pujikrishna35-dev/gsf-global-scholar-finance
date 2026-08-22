@@ -187,11 +187,7 @@ const StudentLogin = () => {
         {/* Card Header */}
         <div className="student-auth-header">
           <div className="student-brand-logo">
-            <ShieldCheck size={30} color="#005C5B" />
-            <div style={{ textAlign: 'left' }}>
-              <span className="student-brand-title">GSF</span>
-              <span className="student-brand-sub">Student Portal</span>
-            </div>
+            <img src="/images/logo/gsf-logo.png" alt="GSF Global Scholar Finance" style={{ height: '56px', width: 'auto', objectFit: 'contain' }} />
           </div>
 
           <h2>

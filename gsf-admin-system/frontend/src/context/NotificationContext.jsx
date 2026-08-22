@@ -93,6 +93,8 @@ export const NotificationProvider = ({ children }) => {
     }
   }, []);
 
+  const [lastLeadEvent, setLastLeadEvent] = useState(null);
+
   useEffect(() => {
     fetchNotifications();
 
@@ -122,6 +124,16 @@ export const NotificationProvider = ({ children }) => {
       setTimeout(() => {
         setActiveToast((current) => (current?.id === notif.id ? null : current));
       }, 6000);
+    });
+
+    socket.on('new_lead', (lead) => {
+      console.log('⚡ Real-Time New Lead Received:', lead);
+      setLastLeadEvent({ type: 'new_lead', lead, timestamp: Date.now() });
+    });
+
+    socket.on('lead_updated', (lead) => {
+      console.log('⚡ Real-Time Lead Update Received:', lead);
+      setLastLeadEvent({ type: 'lead_updated', lead, timestamp: Date.now() });
     });
 
     return () => {
@@ -196,6 +208,7 @@ export const NotificationProvider = ({ children }) => {
         selectedSound,
         notificationVolume,
         newNotifAnim,
+        lastLeadEvent,
         saveSoundSettings,
         markAsRead,
         markAllAsRead,

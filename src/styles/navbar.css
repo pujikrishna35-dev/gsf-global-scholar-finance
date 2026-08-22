@@ -24,7 +24,7 @@
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 8px 24px;
+  padding: 6px 24px;
   height: 68px;
   background: #FFFFFF;
   border-radius: 14px;
@@ -37,14 +37,18 @@
 .navbar-logo {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-logo img {
-  width: 180px;
+  width: 165px;
   height: auto;
-  max-height: 68px;
+  max-height: 56px;
   object-fit: contain;
+  display: block;
 }
 
 .navbar-menu {
@@ -343,10 +347,12 @@
   }
 
   .navbar-logo img {
-    width: 120px;
-    max-height: 44px;
+    width: 135px;
+    height: auto;
+    max-height: 48px;
+    object-fit: contain;
   }
-
+  
   .navbar-actions {
     margin-right: 0;
     gap: 6px;
@@ -371,7 +377,10 @@
 
 @media (max-width: 360px) {
   .navbar-logo img {
-    width: 100px;
+    width: 115px;
+    height: auto;
+    max-height: 40px;
+    object-fit: contain;
   }
 
   .navbar-actions .btn-primary {

@@ -236,7 +236,7 @@ const LeadDetail = () => {
                   <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#07324A' }}>Personal Information</h3>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
                   <div>
                     <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>STUDENT NAME</span>
                     <div style={{ fontWeight: 800, color: '#07324A', fontSize: '1rem', marginTop: '2px' }}>{lead.name}</div>
@@ -248,6 +248,10 @@ const LeadDetail = () => {
                   <div>
                     <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>EMAIL ADDRESS</span>
                     <div style={{ fontWeight: 700, color: '#07324A', marginTop: '2px' }}>{lead.email}</div>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>PREFERRED CONTACT</span>
+                    <div style={{ fontWeight: 700, color: '#005C5B', marginTop: '2px' }}>{lead.contactMethod || 'Phone Call'}</div>
                   </div>
                 </div>
               </div>
@@ -261,16 +265,22 @@ const LeadDetail = () => {
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
                   <div>
-                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>DESTINATION / COUNTRY</span>
-                    <div style={{ fontWeight: 800, color: '#005C5B', fontSize: '0.95rem', marginTop: '2px' }}>{lead.country} ({lead.destination})</div>
+                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>STUDY DESTINATION</span>
+                    <div style={{ fontWeight: 800, color: '#005C5B', fontSize: '0.95rem', marginTop: '2px' }}>
+                      {lead.studyDestination || lead.country || lead.destination}
+                    </div>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>UNIVERSITY / COLLEGE</span>
-                    <div style={{ fontWeight: 800, color: '#07324A', marginTop: '2px' }}>{lead.university}</div>
+                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>TARGET UNIVERSITY</span>
+                    <div style={{ fontWeight: 800, color: '#07324A', marginTop: '2px' }}>
+                      {lead.targetUniversity || lead.university}
+                    </div>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>TARGET COURSE & INTAKE</span>
-                    <div style={{ fontWeight: 700, color: '#07324A', marginTop: '2px' }}>{lead.course} • {lead.intake}</div>
+                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>COURSE LEVEL & NAME</span>
+                    <div style={{ fontWeight: 700, color: '#07324A', marginTop: '2px' }}>
+                      {lead.courseLevel ? `${lead.courseLevel} - ` : ''}{lead.courseName || lead.course}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -282,19 +292,29 @@ const LeadDetail = () => {
                   <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#07324A' }}>Financial & Loan Requirements</h3>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
                   <div>
-                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>LOAN AMOUNT REQUESTED</span>
-                    <div style={{ fontWeight: 800, color: '#D9941E', fontSize: '1.1rem', marginTop: '2px' }}>{formatCurrency(lead.loanAmount)}</div>
+                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>REQUESTED LOAN AMOUNT</span>
+                    <div style={{ fontWeight: 800, color: '#D9941E', fontSize: '1.1rem', marginTop: '2px' }}>
+                      {lead.requestedLoanAmount || formatCurrency(lead.loanAmount)}
+                    </div>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>LOAN TYPE</span>
-                    <div style={{ fontWeight: 700, color: '#07324A', marginTop: '2px' }}>{lead.loanType}</div>
+                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>APPROX TUITION FEE</span>
+                    <div style={{ fontWeight: 700, color: '#07324A', marginTop: '2px' }}>
+                      {lead.approxTuitionFee || 'N/A'}
+                    </div>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>CO-APPLICANT STATUS</span>
+                    <div style={{ fontWeight: 700, color: lead.coApplicant === 'Yes' ? '#15803D' : '#64748B', marginTop: '2px' }}>
+                      {lead.coApplicant || 'No'}
+                    </div>
                   </div>
                   <div>
                     <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>COLLATERAL STATUS</span>
-                    <div style={{ fontWeight: 700, color: lead.hasCollateral ? '#15803D' : '#0369A1', marginTop: '2px' }}>
-                      {lead.hasCollateral ? 'Property Collateral Available' : 'No Collateral (Unsecured Loan Request)'}
+                    <div style={{ fontWeight: 700, color: lead.collateral === 'Yes' || lead.hasCollateral ? '#15803D' : '#0369A1', marginTop: '2px' }}>
+                      {lead.collateral || (lead.hasCollateral ? 'Yes' : 'No')}
                     </div>
                   </div>
                 </div>
@@ -313,11 +333,13 @@ const LeadDetail = () => {
                   </div>
                   <div>
                     <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>ASSIGNED TO</span>
-                    <div style={{ fontWeight: 700, color: '#005C5B' }}>{lead.assignedEmployee}</div>
+                    <div style={{ fontWeight: 700, color: '#005C5B' }}>{lead.assignedEmployee || 'Unassigned'}</div>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>CREATED DATE</span>
-                    <div style={{ fontWeight: 700, color: '#07324A' }}>{new Date(lead.createdAt).toLocaleDateString()}</div>
+                    <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 700 }}>SUBMISSION DATE & TIME</span>
+                    <div style={{ fontWeight: 700, color: '#07324A' }}>
+                      {lead.createdAt ? new Date(lead.createdAt).toLocaleString() : ''}
+                    </div>
                   </div>
                 </div>
               </div>

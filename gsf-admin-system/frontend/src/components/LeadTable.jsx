@@ -43,19 +43,27 @@ const LeadTable = ({ leads, onStatusChange }) => {
                 <tr key={lead.id}>
                   <td>
                     <div style={{ fontWeight: 800, color: '#07324A', fontSize: '0.95rem' }}>{lead.name}</div>
-                    <div style={{ fontSize: '0.78rem', color: '#64748B' }}>{lead.course}</div>
+                    <div style={{ fontSize: '0.78rem', color: '#64748B' }}>
+                      {lead.courseLevel ? `${lead.courseLevel} - ` : ''}{lead.courseName || lead.course}
+                    </div>
                   </td>
                   <td>
                     <div style={{ fontWeight: 600 }}>{lead.phone}</div>
                     <div style={{ fontSize: '0.78rem', color: '#64748B' }}>{lead.email}</div>
                   </td>
                   <td>
-                    <div style={{ fontWeight: 700, color: '#005C5B' }}>{lead.university}</div>
-                    <div style={{ fontSize: '0.78rem', color: '#64748B' }}>{lead.country} • {lead.intake}</div>
+                    <div style={{ fontWeight: 700, color: '#005C5B' }}>{lead.targetUniversity || lead.university}</div>
+                    <div style={{ fontSize: '0.78rem', color: '#64748B' }}>
+                      {lead.studyDestination || lead.country || lead.destination} • {lead.createdAt ? new Date(lead.createdAt).toLocaleDateString() : ''}
+                    </div>
                   </td>
                   <td>
-                    <div style={{ fontWeight: 800, color: '#07324A' }}>{formatCurrency(lead.loanAmount)}</div>
-                    <span style={{ fontSize: '0.72rem', color: '#64748B', fontWeight: 600 }}>{lead.loanType}</span>
+                    <div style={{ fontWeight: 800, color: '#07324A' }}>
+                      {lead.requestedLoanAmount || formatCurrency(lead.loanAmount)}
+                    </div>
+                    <div style={{ fontSize: '0.72rem', color: '#64748B', fontWeight: 600 }}>
+                      Co-app: {lead.coApplicant || 'No'} • Collateral: {lead.collateral || (lead.hasCollateral ? 'Yes' : 'No')}
+                    </div>
                   </td>
                   <td>
                     <ClassificationBadge classification={lead.leadClassification} />

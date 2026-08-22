@@ -98,7 +98,11 @@ const LendingPartners = () => {
                   src={partner.logo}
                   alt={`${partner.name} logo`}
                   className="partner-official-logo"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
                 />
+                <span className="partner-name">{partner.name}</span>
               </div>
 
               <div className="partner-info">

@@ -26,17 +26,26 @@ const StudyDestinations = ({ onOpenModal }) => {
           />
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-            <div style={{ background: '#F8FAFC', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
-              <h3 style={{ color: '#0A4D4E', marginBottom: '8px' }}>🇺🇸 USA Loans</h3>
-              <p style={{ fontSize: '0.9rem', color: '#64748B' }}>Non-collateral loans available up to $100,000 without US co-signer. Ideal for STEM & I-20 proof.</p>
+            <div style={{ background: '#F8FAFC', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <h3 style={{ color: '#0A4D4E', marginBottom: '8px' }}>🇺🇸 USA Loans</h3>
+                <p style={{ fontSize: '0.9rem', color: '#64748B', marginBottom: '16px' }}>Non-collateral loans available up to $100,000 without US co-signer. Ideal for STEM & I-20 proof.</p>
+              </div>
+              <a href="/country/usa" style={{ color: '#005C5B', fontWeight: '700', fontSize: '0.9rem', textDecoration: 'none' }}>Explore USA Loans →</a>
             </div>
-            <div style={{ background: '#F8FAFC', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
-              <h3 style={{ color: '#0A4D4E', marginBottom: '8px' }}>🇬🇧 UK Loans</h3>
-              <p style={{ fontSize: '0.9rem', color: '#64748B' }}>Fast 3-day sanction letters for CAS issuing and UKVI visa financial compliance verification.</p>
+            <div style={{ background: '#F8FAFC', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <h3 style={{ color: '#0A4D4E', marginBottom: '8px' }}>🇬🇧 UK Loans</h3>
+                <p style={{ fontSize: '0.9rem', color: '#64748B', marginBottom: '16px' }}>Fast 3-day sanction letters for CAS issuing and UKVI visa financial compliance verification.</p>
+              </div>
+              <a href="/country/uk" style={{ color: '#005C5B', fontWeight: '700', fontSize: '0.9rem', textDecoration: 'none' }}>Explore UK Loans →</a>
             </div>
-            <div style={{ background: '#F8FAFC', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
-              <h3 style={{ color: '#0A4D4E', marginBottom: '8px' }}>🇨🇦 Canada Loans</h3>
-              <p style={{ fontSize: '0.9rem', color: '#64748B' }}>Funding both SDS tuition fees and GIC deposit (approx $20,635 CAD) in a single sanction letter.</p>
+            <div style={{ background: '#F8FAFC', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <h3 style={{ color: '#0A4D4E', marginBottom: '8px' }}>🇨🇦 Canada Loans</h3>
+                <p style={{ fontSize: '0.9rem', color: '#64748B', marginBottom: '16px' }}>Funding both SDS tuition fees and GIC deposit (approx $20,635 CAD) in a single sanction letter.</p>
+              </div>
+              <a href="/country/canada" style={{ color: '#005C5B', fontWeight: '700', fontSize: '0.9rem', textDecoration: 'none' }}>Explore Canada Loans →</a>
             </div>
           </div>
         </div>

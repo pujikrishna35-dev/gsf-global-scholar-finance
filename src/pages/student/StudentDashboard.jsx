@@ -192,8 +192,8 @@ const StudentDashboard = () => {
       <header className="student-header">
         <div className="student-header-inner">
           <div className="student-logo">
-            <ShieldCheck size={28} color="#005C5B" />
-            <span className="student-logo-text">GSF Student Portal</span>
+            <img src="/images/logo/gsf-logo.png" alt="GSF Global Scholar Finance" style={{ height: '42px', width: 'auto', objectFit: 'contain' }} />
+            <span className="student-logo-text" style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: 600, borderLeft: '1px solid #CBD5E1', paddingLeft: '10px', marginLeft: '4px' }}>Student Portal</span>
           </div>
 
           <div className="student-user-meta">

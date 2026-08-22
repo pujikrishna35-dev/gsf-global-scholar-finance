@@ -41,20 +41,18 @@ const Sidebar = () => {
       <div>
         {/* Brand Header */}
         <div style={{ padding: '24px', borderBottom: '1px solid rgba(255, 255, 255, 0.1)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '10px',
-            backgroundColor: '#005C5B',
-            color: '#F4B63F',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontWeight: 800,
-            fontSize: '1.2rem'
-          }}>
-            GSF
-          </div>
+          <img 
+            src="/images/logo/gsf-logo.png" 
+            alt="GSF Global Scholar Finance" 
+            style={{ 
+              height: '40px', 
+              width: 'auto',
+              objectFit: 'contain',
+              backgroundColor: '#FFFFFF',
+              padding: '4px 8px',
+              borderRadius: '8px'
+            }} 
+          />
           <div>
             <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#FFFFFF', lineHeight: 1.2 }}>GSF Admin</h3>
             <span style={{ fontSize: '0.72rem', color: '#F4B63F', fontWeight: 700, letterSpacing: '0.5px' }}>CRM & API SYSTEM</span>

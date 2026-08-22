@@ -35,19 +35,43 @@ export class LeadService {
     const newId = `lead-${Date.now()}`;
     const classification = (data.leadClassification || data.studentSelectedClassification || 'MEDIUM') as LeadClassification;
 
+    const studyDest = data.studyDestination || data.preferredCountry || data.destination || data.country || 'Global';
+    const univ = data.targetUniversity || data.university || 'Target Institute';
+    const crs = data.courseName || data.targetCourse || data.course || 'Higher Education';
+    const crsLvl = data.courseLevel || data.qualificationLevel || 'PG';
+    const reqLoan = data.requestedLoanAmount || (data.loanAmount ? String(data.loanAmount) : 'Flexible');
+    const coApp = data.coApplicant || (data as any).coApplicantStatus || 'No';
+    const colla = data.collateral || (data as any).collateralStatus || (data.hasCollateral ? 'Yes' : 'No');
+    const contactM = data.contactMethod || (data as any).preferredContactMethod || 'Phone Call';
+    const tuitionF = data.approxTuitionFee || '';
+
+    // Calculate numeric loan amount fallback if user provided string like "₹40 Lakhs" or 4000000
+    let numericLoanAmount = 2500000;
+    if (typeof data.loanAmount === 'number' && data.loanAmount > 0) {
+      numericLoanAmount = data.loanAmount;
+    } else if (reqLoan) {
+      const matchedDigits = reqLoan.replace(/[^0-9.]/g, '');
+      if (matchedDigits) {
+        const val = parseFloat(matchedDigits);
+        if (reqLoan.toLowerCase().includes('lakh')) numericLoanAmount = val * 100000;
+        else if (reqLoan.toLowerCase().includes('cr')) numericLoanAmount = val * 10000000;
+        else if (val > 100) numericLoanAmount = val;
+      }
+    }
+
     const newLead: Lead = {
       id: newId,
       name: data.name || 'Anonymous Student',
       phone: data.phone || '',
       email: data.email || '',
-      destination: data.destination || 'Global',
-      country: data.country || data.destination || 'Global',
-      university: data.university || 'Target Institute',
-      course: data.course || 'Higher Education',
+      destination: studyDest,
+      country: studyDest,
+      university: univ,
+      course: crs,
       intake: data.intake || 'Upcoming Intake',
-      loanAmount: Number(data.loanAmount) || 2500000,
-      loanType: data.loanType || 'Non-Collateral',
-      hasCollateral: Boolean(data.hasCollateral),
+      loanAmount: numericLoanAmount,
+      loanType: data.loanType || (colla === 'Yes' ? 'Collateral' : 'Non-Collateral'),
+      hasCollateral: colla === 'Yes',
       studentSelectedClassification: classification,
       leadClassification: classification,
       status: 'New',
@@ -55,13 +79,22 @@ export class LeadService {
       campaign: data.campaign || 'Direct',
       assignedEmployee: 'Unassigned',
       otpVerified: Boolean(data.otpVerified),
-      qualificationLevel: data.qualificationLevel || 'PG',
+      qualificationLevel: crsLvl as any,
       admissionStatus: data.admissionStatus || 'CONFIRMED',
       addressLine1: data.addressLine1 || '',
       addressLine2: data.addressLine2 || '',
       city: data.city || '',
       state: data.state || '',
       pincode: data.pincode || '',
+      studyDestination: studyDest,
+      courseLevel: crsLvl,
+      courseName: crs,
+      targetUniversity: univ,
+      requestedLoanAmount: reqLoan,
+      coApplicant: coApp,
+      collateral: colla,
+      contactMethod: contactM,
+      approxTuitionFee: tuitionF,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       activities: [

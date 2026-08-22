@@ -4,17 +4,28 @@
  */
 export const GSF_BRANCHES = [
   {
-    id: "nellore",
-    name: "Nellore",
+    id: "Nellore-1 (Ramalinga Puram)",
+    name: "Nellore-1 (Ramalinga Puram)",
     city: "Nellore",
     phone: "+91 98765 43210",
     rawPhone: "+919876543210",
-    address: "Grand Trunk Road, Nellore, Andhra Pradesh",
+    address: "Srivari Plaza, Circle, Ramalinga Puram, Nellore, Andhra Pradesh 524003, India",
     timings: "9:30 AM - 6:30 PM",
     email: "nellore@gsf.com"
   },
+
   {
-    id: "hyderabad",
+    id: "Nellore-2 (Magunta Layout)",
+    name: "Nellore-2 (Magunta Layout)",
+    city: "Nellore",
+    phone: "+91 99887 76655",
+    rawPhone: "+919988776655",
+    address: "Near viswasai school, Central Avenue, Dargamitta, Magunta Layout, Nellore, Andhra Pradesh 524003, India",
+    timings: "9:30 AM - 6:30 PM",
+    email: "bangalore@gsf.com"
+  },
+  {
+    id: "Hyderabad",
     name: "Hyderabad",
     city: "Hyderabad",
     phone: "+91 91234 56789",
@@ -24,22 +35,12 @@ export const GSF_BRANCHES = [
     email: "hyderabad@gsf.com"
   },
   {
-    id: "bangalore",
-    name: "Bangalore",
-    city: "Bangalore",
-    phone: "+91 99887 76655",
-    rawPhone: "+919988776655",
-    address: "Indiranagar 100ft Road, Bengaluru, Karnataka",
-    timings: "9:30 AM - 6:30 PM",
-    email: "bangalore@gsf.com"
-  },
-  {
-    id: "vijayawada",
-    name: "Vijayawada",
-    city: "Vijayawada",
+    id: "Tirupati",
+    name: "Tirupati",
+    city: "Tirupati",
     phone: "+91 95544 33221",
     rawPhone: "+919554433221",
-    address: "MG Road, Vijayawada, Andhra Pradesh",
+    address: "GSF, Mr.palli circle, road, near lenskart, fashion zone, Avilali, Andhra Pradesh 517502, India",
     timings: "9:30 AM - 6:30 PM",
     email: "vijayawada@gsf.com"
   },
