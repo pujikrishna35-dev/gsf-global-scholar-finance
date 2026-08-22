@@ -14,6 +14,7 @@ const EligibilityModal = ({ isOpen, onClose }) => {
   const [otpError, setOtpError] = useState('');
   const [otpLoading, setOtpLoading] = useState(false);
   const [cooldownSec, setCooldownSec] = useState(0);
+  const [otpSuccessMsg, setOtpSuccessMsg] = useState('');
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -71,8 +72,6 @@ const EligibilityModal = ({ isOpen, onClose }) => {
     NEXT: 'MEDIUM',
     FUTURE: 'COLD'
   };
-
-  const [otpSuccessMsg, setOtpSuccessMsg] = useState('');
 
   const formatE164Phone = (phoneStr) => {
     if (!phoneStr) return '';
