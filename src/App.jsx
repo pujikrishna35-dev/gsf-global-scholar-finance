@@ -14,34 +14,20 @@ import LoanOptions from './pages/LoanOptions';
 import Resources from './pages/Resources';
 import Contact from './pages/Contact';
 import CountryLoanPage from './pages/CountryLoanPage';
+import AdminLogin from './pages/AdminLogin';
 
-const AdminRedirect = () => {
-  const adminUrl = import.meta.env.VITE_ADMIN_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5174' : '');
+// Student Panel Components
+import StudentLogin from './pages/student/StudentLogin';
+import StudentDashboard from './pages/student/StudentDashboard';
 
-  React.useEffect(() => {
-    if (adminUrl) {
-      window.location.href = adminUrl;
-    }
-  }, [adminUrl]);
-
-  return (
-    <div style={{ textAlign: 'center', padding: '100px 20px', minHeight: '60vh' }}>
-      <h2 style={{ fontSize: '2rem', color: '#07324A', marginBottom: '16px' }}>GSF Admin Portal</h2>
-      <p style={{ color: '#64748B', marginBottom: '24px', fontSize: '1.1rem' }}>
-        Redirecting to GSF Super Admin Portal...
-      </p>
-      <a href={adminUrl || '#'} className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-        Open Admin Login Portal →
-      </a>
-    </div>
-  );
-};
+import './styles/global.css';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isBranchModalOpen, setIsBranchModalOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const isStudentRoute = location.pathname.startsWith('/student');
 
   // Scroll to top on route change
   React.useEffect(() => {
@@ -62,6 +48,16 @@ function App() {
     }
   }, [isHome]);
 
+  if (isStudentRoute) {
+    return (
+      <Routes>
+        <Route path="/student" element={<Navigate to="/student/login" replace />} />
+        <Route path="/student/login" element={<StudentLogin />} />
+        <Route path="/student/dashboard" element={<StudentDashboard />} />
+      </Routes>
+    );
+  }
+
   return (
     <div className="app-container">
       <Navbar
@@ -79,10 +75,9 @@ function App() {
           <Route path="/loan-options" element={<LoanOptions onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/resources" element={<Resources onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/contact" element={<Contact onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
-          <Route path="/admin" element={<AdminRedirect />} />
-          <Route path="/admin/*" element={<AdminRedirect />} />
-          <Route path="/admin/login" element={<AdminRedirect />} />
-          <Route path="/login" element={<AdminRedirect />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
         </Routes>
       </main>
 

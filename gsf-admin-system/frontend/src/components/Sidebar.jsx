@@ -47,7 +47,6 @@ const Sidebar = () => {
             style={{ 
               height: '40px', 
               width: 'auto',
-              maxWidth: '145px',
               objectFit: 'contain',
               backgroundColor: '#FFFFFF',
               padding: '4px 8px',

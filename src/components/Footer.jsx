@@ -23,11 +23,7 @@ const Footer = () => {
           {/* Brand Col */}
           <div className="footer-brand">
             <Link to="/" className="footer-logo">
-              <img 
-                src="/images/logo/gsf-logo.png" 
-                alt="GSF Global Scholar Finance" 
-                style={{ width: '160px', maxWidth: '160px', maxHeight: '48px', height: 'auto', objectFit: 'contain', display: 'block' }}
-              />
+              <img src="/images/logo/gsf-logo.png" alt="GSF Global Scholar Finance" />
             </Link>
             <p className="footer-tagline">
               Making education financing easier, faster, and transparent for students pursuing higher studies in India and abroad.
@@ -59,6 +55,7 @@ const Footer = () => {
               <li><Link to="/loan-options">Loan Options</Link></li>
               <li><Link to="/resources">Resources & FAQs</Link></li>
               <li><Link to="/contact">Contact Us</Link></li>
+              <li><Link to="/admin/login" style={{ color: '#F4B63F', fontWeight: '700' }}>Admin Portal Login</Link></li>
             </ul>
           </div>
 

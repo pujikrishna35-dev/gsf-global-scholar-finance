@@ -32,16 +32,12 @@ const Navbar = ({ onOpenModal, onOpenBranchModal }) => {
     <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container navbar-inner">
         {/* LEFT: Logo */}
-        <Link to="/" className="navbar-logo" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-          <img 
-            src="/images/logo/gsf-logo.png" 
-            alt="GSF Global Scholar Finance Logo" 
-            style={{ width: '165px', maxWidth: '165px', maxHeight: '52px', height: 'auto', objectFit: 'contain', display: 'block' }}
-          />
+        <Link to="/" className="navbar-logo">
+          <img src="/images/logo/gsf-logo.png" alt="GSF Global Scholar Finance Logo" />
         </Link>
 
         {/* CENTER: Navigation Links */}
-        <ul className="navbar-menu" style={{ display: 'flex', alignItems: 'center', gap: '8px', listStyle: 'none', margin: 0, padding: 0 }}>
+        <ul className="navbar-menu">
           {NAV_LINKS.map((link, idx) => (
             <li key={idx} className="nav-item">
               <Link
