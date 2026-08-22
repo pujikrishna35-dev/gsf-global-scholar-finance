@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Users, 
-  Flame, 
-  Sun, 
-  Snowflake, 
-  LogOut, 
-  RefreshCw, 
-  CheckCircle2, 
-  Search, 
+import {
+  Users,
+  Flame,
+  Sun,
+  Snowflake,
+  LogOut,
+  RefreshCw,
+  CheckCircle2,
+  Search,
   ArrowLeft,
   Building2,
   FileText,
@@ -155,7 +155,7 @@ const WebsiteAdminDashboard = () => {
 
   const filteredLeads = leads.filter((l) => {
     const matchesFilter = filter === 'ALL' || l.leadClassification === filter;
-    const matchesSearch = !search || 
+    const matchesSearch = !search ||
       l.name.toLowerCase().includes(search.toLowerCase()) ||
       l.phone.includes(search) ||
       (l.email && l.email.toLowerCase().includes(search.toLowerCase())) ||
@@ -174,7 +174,7 @@ const WebsiteAdminDashboard = () => {
   return (
     <div style={{ backgroundColor: '#F8FAFC', minHeight: '100vh', padding: '40px 24px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        
+
         {/* Header Bar */}
         <div style={{
           display: 'flex',
@@ -262,7 +262,7 @@ const WebsiteAdminDashboard = () => {
 
           <div style={{ background: '#FFFFFF', padding: '20px', borderRadius: '14px', border: '1px solid #FEF3C7', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#D97706' }}>🟡 MEDIUM LEADS</span>
+              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#D97706' }}>🟡 WARM LEADS</span>
               <Sun size={20} color="#D97706" />
             </div>
             <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#D97706', marginTop: '8px' }}>

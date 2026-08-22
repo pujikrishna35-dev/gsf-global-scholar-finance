@@ -4,15 +4,15 @@ import Header from '../components/Header';
 import StatsCard from '../components/StatsCard';
 import LeadTable from '../components/LeadTable';
 import { api } from '../lib/api';
-import { 
-  Users, 
-  Flame, 
-  Sun, 
-  Snowflake, 
-  Sparkles, 
-  CalendarClock, 
-  FileCheck, 
-  Award, 
+import {
+  Users,
+  Flame,
+  Sun,
+  Snowflake,
+  Sparkles,
+  CalendarClock,
+  FileCheck,
+  Award,
   Banknote,
   TrendingUp
 } from 'lucide-react';
@@ -62,7 +62,7 @@ const Dashboard = () => {
         <Header title="Admin Dashboard Overview" />
 
         <div className="admin-content" style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-          
+
           {/* Top Row Metrics */}
           <div className="admin-stats-grid-4">
             <StatsCard
@@ -82,7 +82,7 @@ const Dashboard = () => {
               bg="#FEE2E2"
             />
             <StatsCard
-              title="MEDIUM LEADS"
+              title="WARM LEADS"
               value={stats?.mediumLeads || 0}
               subtitle="Moderate intake timeline"
               icon={Sun}

@@ -47,7 +47,7 @@ const Leads = () => {
   const filterTabs = [
     { key: 'ALL', label: 'All Inquiries' },
     { key: 'HOT', label: '🔥 HOT Leads' },
-    { key: 'MEDIUM', label: '🟡 MEDIUM Leads' },
+    { key: 'MEDIUM', label: '🟡 WARM Leads' },
     { key: 'COLD', label: '🔵 COLD Leads' }
   ];
 
@@ -62,7 +62,7 @@ const Leads = () => {
         />
 
         <div className="admin-content" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          
+
           {/* Filter Bar & Controls */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <div style={{ display: 'flex', gap: '8px', backgroundColor: '#FFFFFF', padding: '6px', borderRadius: '10px', border: '1px solid #E2E8F0' }}>
