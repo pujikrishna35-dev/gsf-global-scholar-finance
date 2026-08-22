@@ -52,17 +52,6 @@ export interface Lead {
   city?: string;
   state?: string;
   pincode?: string;
-  studyDestination?: string;
-  preferredCountry?: string;
-  courseLevel?: string;
-  courseName?: string;
-  targetCourse?: string;
-  targetUniversity?: string;
-  requestedLoanAmount?: string;
-  coApplicant?: string;
-  collateral?: string;
-  contactMethod?: string;
-  approxTuitionFee?: string;
   activities?: LeadActivity[];
   followUps?: FollowUpItem[];
   createdAt: string;
