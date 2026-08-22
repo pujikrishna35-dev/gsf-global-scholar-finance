@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Lock, Mail, ArrowRight, AlertCircle, ExternalLink } from 'lucide-react';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-const ADMIN_PORTAL_URL = import.meta.env.VITE_ADMIN_DASHBOARD_URL || 'http://localhost:5174';
+const API_BASE = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : '/api');
+const ADMIN_PORTAL_URL = import.meta.env.VITE_ADMIN_DASHBOARD_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5174' : window.location.origin);
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('admin@gsf.com');
@@ -31,14 +31,17 @@ const AdminLogin = () => {
         localStorage.setItem('gsf_admin_user', JSON.stringify(data.user));
         
         // Redirect to Admin Panel App
-        window.location.href = `${ADMIN_PORTAL_URL}/leads`;
+        if (ADMIN_PORTAL_URL && ADMIN_PORTAL_URL !== window.location.origin) {
+          window.location.href = `${ADMIN_PORTAL_URL}/leads`;
+        } else {
+          window.location.href = `${window.location.origin}/leads`;
+        }
       } else {
         setError(data.message || 'Authentication failed. Invalid email or password.');
       }
     } catch (err) {
       console.error('Admin login error:', err);
-      // Fallback redirect to local admin dashboard if available
-      window.location.href = `${ADMIN_PORTAL_URL}/login`;
+      setError('Unable to connect to GSF Admin Backend API. Please verify backend environment variable VITE_API_URL.');
     } finally {
       setLoading(false);
     }
@@ -173,24 +176,26 @@ const AdminLogin = () => {
           </button>
         </form>
 
-        <div style={{ marginTop: '24px', paddingTop: '20px', borderTop: '1px solid #E2E8F0', textAlign: 'center' }}>
-          <a
-            href={ADMIN_PORTAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: '#005C5B',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              textDecoration: 'none'
-            }}
-          >
-            Open Standalone Admin Portal <ExternalLink size={14} />
-          </a>
-        </div>
+        {import.meta.env.VITE_ADMIN_DASHBOARD_URL && (
+          <div style={{ marginTop: '24px', paddingTop: '20px', borderTop: '1px solid #E2E8F0', textAlign: 'center' }}>
+            <a
+              href={ADMIN_PORTAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                color: '#005C5B',
+                fontWeight: 700,
+                fontSize: '0.9rem',
+                textDecoration: 'none'
+              }}
+            >
+              Open Standalone Admin Portal <ExternalLink size={14} />
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

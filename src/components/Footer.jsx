@@ -55,7 +55,7 @@ const Footer = () => {
               <li><Link to="/loan-options">Loan Options</Link></li>
               <li><Link to="/resources">Resources & FAQs</Link></li>
               <li><Link to="/contact">Contact Us</Link></li>
-              <li><Link to="/admin/login" style={{ color: '#F4B63F', fontWeight: '700' }}>Admin Portal Login</Link></li>
+              <li><Link to="/admin" style={{ color: '#F4B63F', fontWeight: '700' }}>Admin Portal Login</Link></li>
             </ul>
           </div>
 

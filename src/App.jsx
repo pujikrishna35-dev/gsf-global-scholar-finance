@@ -76,8 +76,6 @@ function App() {
           <Route path="/resources" element={<Resources onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/contact" element={<Contact onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin-login" element={<AdminLogin />} />
         </Routes>
       </main>
 
