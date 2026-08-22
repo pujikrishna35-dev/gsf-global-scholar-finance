@@ -15,10 +15,6 @@ import Resources from './pages/Resources';
 import Contact from './pages/Contact';
 import CountryLoanPage from './pages/CountryLoanPage';
 
-// Student Panel Components
-import StudentLogin from './pages/student/StudentLogin';
-import StudentDashboard from './pages/student/StudentDashboard';
-
 import './styles/global.css';
 
 function App() {
@@ -26,7 +22,6 @@ function App() {
   const [isBranchModalOpen, setIsBranchModalOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
-  const isStudentRoute = location.pathname.startsWith('/student');
 
   // Scroll to top on route change
   React.useEffect(() => {
@@ -46,16 +41,6 @@ function App() {
       }
     }
   }, [isHome]);
-
-  if (isStudentRoute) {
-    return (
-      <Routes>
-        <Route path="/student" element={<Navigate to="/student/login" replace />} />
-        <Route path="/student/login" element={<StudentLogin />} />
-        <Route path="/student/dashboard" element={<StudentDashboard />} />
-      </Routes>
-    );
-  }
 
   return (
     <div className="app-container">
