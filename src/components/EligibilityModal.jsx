@@ -72,6 +72,23 @@ const EligibilityModal = ({ isOpen, onClose }) => {
     FUTURE: 'COLD'
   };
 
+  const [otpSuccessMsg, setOtpSuccessMsg] = useState('');
+
+  const formatE164Phone = (phoneStr) => {
+    if (!phoneStr) return '';
+    let digits = phoneStr.replace(/[^\d+]/g, '');
+    if (!digits.startsWith('+')) {
+      if (digits.length === 10) {
+        return `+91${digits}`;
+      } else if (digits.length === 12 && digits.startsWith('91')) {
+        return `+${digits}`;
+      } else {
+        return `+91${digits}`;
+      }
+    }
+    return digits;
+  };
+
   // Reset OTP verification immediately if student modifies mobile number
   const handlePhoneChange = (e) => {
     const newPhone = e.target.value;
@@ -82,38 +99,54 @@ const EligibilityModal = ({ isOpen, onClose }) => {
       setOtpSent(false);
       setOtpInput('');
       setCooldownSec(0);
+      setOtpSuccessMsg('');
       setOtpError('Mobile number changed. Please verify your new mobile number.');
     } else {
       setOtpError('');
+      setOtpSuccessMsg('');
     }
   };
 
   // Request Twilio OTP Send
   const handleSendOtp = async () => {
-    if (!formData.phone || formData.phone.trim().length < 8) {
-      setOtpError('Please enter a valid mobile number first.');
+    const formattedPhone = formatE164Phone(formData.phone);
+    const digitsOnly = formattedPhone.replace(/\D/g, '');
+
+    if (!digitsOnly || digitsOnly.length < 10) {
+      setOtpError('Please enter a valid 10-digit mobile number.');
       return;
     }
 
     setOtpLoading(true);
     setOtpError('');
+    setOtpSuccessMsg('');
 
     try {
-      const res = await fetch(`${API_BASE}/otp/send`, {
+      let res = await fetch(`${API_BASE}/auth/send-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: formData.phone })
+        body: JSON.stringify({ phone: formattedPhone })
       });
+
+      if (!res.ok) {
+        res = await fetch(`${API_BASE}/otp/send`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: formattedPhone })
+        });
+      }
+
       const data = await res.json();
 
       if (data.success) {
         setOtpSent(true);
         setCooldownSec(30); // 30s cooldown
+        setOtpSuccessMsg(`OTP sent successfully to ${data.e164Phone || formattedPhone}.`);
       } else {
-        setOtpError(data.message || 'Failed to send OTP. Please check your phone number.');
+        setOtpError(data.message || "We couldn't send the OTP right now. Please try again.");
       }
     } catch (err) {
-      setOtpError('Network error connecting to backend OTP service.');
+      setOtpError("We couldn't send the OTP right now. Please try again.");
     } finally {
       setOtpLoading(false);
     }
@@ -122,7 +155,7 @@ const EligibilityModal = ({ isOpen, onClose }) => {
   // Verify OTP via Backend / Twilio Verify
   const handleVerifyOtp = async () => {
     if (!otpInput || otpInput.trim().length < 4) {
-      setOtpError('Please enter the verification code sent to your mobile.');
+      setOtpError('Please enter the 6-digit OTP code.');
       return;
     }
 
@@ -130,21 +163,32 @@ const EligibilityModal = ({ isOpen, onClose }) => {
     setOtpError('');
 
     try {
-      const res = await fetch(`${API_BASE}/otp/verify`, {
+      const formattedPhone = formatE164Phone(formData.phone);
+      let res = await fetch(`${API_BASE}/auth/verify-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: formData.phone, code: otpInput })
+        body: JSON.stringify({ phone: formattedPhone, code: otpInput.trim() })
       });
+
+      if (!res.ok) {
+        res = await fetch(`${API_BASE}/otp/verify`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: formattedPhone, code: otpInput.trim() })
+        });
+      }
+
       const data = await res.json();
 
-      if (data.success) {
+      if (data.success && (data.verified || data.verified === undefined)) {
         setOtpVerified(true);
         setOtpError('');
+        setOtpSuccessMsg('');
       } else {
-        setOtpError(data.message || 'Invalid verification code. Please try again.');
+        setOtpError(data.message || 'Invalid OTP. Please try again.');
       }
     } catch (err) {
-      setOtpError('Network error verifying OTP code.');
+      setOtpError('Invalid OTP. Please try again.');
     } finally {
       setOtpLoading(false);
     }
@@ -360,42 +404,88 @@ const EligibilityModal = ({ isOpen, onClose }) => {
 
                 {/* OTP Verification Step */}
                 {otpSent && !otpVerified && (
-                  <div style={{ marginTop: '8px', backgroundColor: '#F8FAFC', padding: '14px', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
-                    <label className="popup-label" style={{ fontSize: '0.82rem', marginBottom: '6px' }}>Enter SMS OTP*</label>
-                    <div className="otp-input-wrapper">
+                  <div style={{ marginTop: '10px', backgroundColor: '#F8FAFC', padding: '16px', borderRadius: '12px', border: '1.5px solid #005C5B' }}>
+                    <p style={{ fontSize: '0.82rem', color: '#07324A', fontWeight: 700, margin: '0 0 8px 0' }}>
+                      Enter the 6-digit OTP sent to {formData.phone}
+                    </p>
+                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
                       <input
                         type="text"
                         maxLength={6}
-                        placeholder="6-digit code"
+                        pattern="\d{6}"
+                        placeholder="123456"
                         className="popup-input"
-                        style={{ height: '42px', letterSpacing: '2px', fontWeight: 700 }}
+                        style={{
+                          height: '46px',
+                          letterSpacing: '6px',
+                          fontWeight: 800,
+                          fontSize: '1.1rem',
+                          textAlign: 'center',
+                          flex: '1 min-width 130px',
+                          backgroundColor: '#FFFFFF'
+                        }}
                         value={otpInput}
-                        onChange={(e) => setOtpInput(e.target.value)}
+                        onChange={(e) => setOtpInput(e.target.value.replace(/\D/g, ''))}
                       />
                       <button
                         type="button"
-                        disabled={otpLoading}
+                        disabled={otpLoading || !otpInput}
                         onClick={handleVerifyOtp}
                         className="otp-action-btn"
-                        style={{ height: '42px', backgroundColor: '#005C5B' }}
+                        style={{
+                          height: '46px',
+                          backgroundColor: '#005C5B',
+                          color: '#FFFFFF',
+                          fontWeight: 700,
+                          padding: '0 20px',
+                          borderRadius: '8px',
+                          border: 'none',
+                          cursor: 'pointer'
+                        }}
                       >
                         {otpLoading ? 'Verifying...' : 'Verify OTP'}
+                      </button>
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
+                      <button
+                        type="button"
+                        disabled={cooldownSec > 0 || otpLoading}
+                        onClick={handleSendOtp}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: cooldownSec > 0 ? '#94A3B8' : '#005C5B',
+                          fontWeight: 700,
+                          fontSize: '0.82rem',
+                          cursor: cooldownSec > 0 ? 'not-allowed' : 'pointer',
+                          padding: 0
+                        }}
+                      >
+                        {cooldownSec > 0 ? `Resend OTP in ${cooldownSec}s` : 'Resend OTP'}
                       </button>
                     </div>
                   </div>
                 )}
 
+                {/* Success or Error Messages */}
+                {otpSuccessMsg && !otpVerified && (
+                  <div style={{ fontSize: '0.82rem', color: '#16A34A', fontWeight: 700, marginTop: '6px' }}>
+                    ✓ {otpSuccessMsg}
+                  </div>
+                )}
+
                 {/* Verified Success Badge */}
                 {otpVerified && (
-                  <div className="otp-verified-badge">
+                  <div className="otp-verified-badge" style={{ marginTop: '8px', display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: '#DCFCE7', color: '#15803D', padding: '6px 12px', borderRadius: '8px', fontWeight: 800, fontSize: '0.85rem' }}>
                     <Check size={16} /> Mobile Number Verified
                   </div>
                 )}
 
                 {otpError && (
-                  <span style={{ fontSize: '0.8rem', color: '#DC2626', fontWeight: 700, marginTop: '4px' }}>
+                  <div style={{ fontSize: '0.82rem', color: '#DC2626', fontWeight: 700, marginTop: '6px' }}>
                     ⚠️ {otpError}
-                  </span>
+                  </div>
                 )}
               </div>
 

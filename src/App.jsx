@@ -15,6 +15,7 @@ import Resources from './pages/Resources';
 import Contact from './pages/Contact';
 import CountryLoanPage from './pages/CountryLoanPage';
 import AdminLogin from './pages/AdminLogin';
+import WebsiteAdminDashboard from './pages/WebsiteAdminDashboard';
 
 // Student Panel Components
 import StudentLogin from './pages/student/StudentLogin';
@@ -76,6 +77,7 @@ function App() {
           <Route path="/resources" element={<Resources onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/contact" element={<Contact onOpenModal={() => setIsModalOpen(true)} onOpenBranchModal={() => setIsBranchModalOpen(true)} />} />
           <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<WebsiteAdminDashboard />} />
         </Routes>
       </main>
 

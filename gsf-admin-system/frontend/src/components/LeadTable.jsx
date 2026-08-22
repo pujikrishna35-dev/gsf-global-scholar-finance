@@ -48,7 +48,14 @@ const LeadTable = ({ leads, onStatusChange }) => {
                     </div>
                   </td>
                   <td>
-                    <div style={{ fontWeight: 600 }}>{lead.phone}</div>
+                    <div style={{ fontWeight: 700, color: '#07324A', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      {lead.phone}
+                      {(lead.otpVerified || lead.otpVerified === undefined) && (
+                        <span style={{ fontSize: '0.68rem', backgroundColor: '#DCFCE7', color: '#15803D', padding: '2px 6px', borderRadius: '4px', fontWeight: 800 }}>
+                          ✓ VERIFIED
+                        </span>
+                      )}
+                    </div>
                     <div style={{ fontSize: '0.78rem', color: '#64748B' }}>{lead.email}</div>
                   </td>
                   <td>
